@@ -7,9 +7,11 @@ import (
 	"k8s.io/client-go/tools/cache"
 
 	operatorv1 "github.com/openshift/api/operator/v1"
+	applyoperatorv1 "github.com/openshift/client-go/operator/applyconfigurations/operator/v1"
 	operatorv1client "github.com/openshift/client-go/operator/clientset/versioned/typed/operator/v1"
 	operatorv1informers "github.com/openshift/client-go/operator/informers/externalversions"
 	"github.com/openshift/console-operator/pkg/api"
+	"github.com/openshift/library-go/pkg/apiserver/jsonpatch"
 )
 
 type OperatorClient struct {
@@ -79,4 +81,16 @@ func (c OperatorClient) GetOperatorStateWithQuorum(ctx context.Context) (*operat
 	}
 
 	return &instance.Spec.OperatorSpec, &instance.Status.OperatorStatus, instance.GetResourceVersion(), nil
+}
+
+func (c OperatorClient) ApplyOperatorSpec(ctx context.Context, fieldManager string, applyConfiguration *applyoperatorv1.OperatorSpecApplyConfiguration) (err error) {
+	return nil
+}
+
+func (c OperatorClient) ApplyOperatorStatus(ctx context.Context, fieldManager string, applyConfiguration *applyoperatorv1.OperatorStatusApplyConfiguration) (err error) {
+	return nil
+}
+
+func (c OperatorClient) PatchOperatorStatus(ctx context.Context, jsonPatch *jsonpatch.PatchSet) (err error) {
+	return nil
 }
